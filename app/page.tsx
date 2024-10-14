@@ -7,16 +7,17 @@ import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
-import {Authenticator} from '@aws-amplify/ui-react';
-import { signOut } from "aws-amplify/auth";
+import { Authenticator } from '@aws-amplify/ui-react';
+import { signOut as awsSignOut } from "aws-amplify/auth"; // Renombramos aquí
 import { User } from "aws-cdk-lib/aws-iam";
+
 Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
-const signOut = (event: React.MouseEvent<HTMLButtonElement>) => {
-  // lógica de cierre de sesión
-};
 
+const customSignOut = (event: React.MouseEvent<HTMLButtonElement>) => { // Renombramos la función
+  awsSignOut(); // Llama a la función de cierre de sesión de AWS
+};
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
@@ -37,7 +38,6 @@ export default function App() {
     });
   }
 
-  
   return (
     <Authenticator>
       <main>
@@ -48,7 +48,7 @@ export default function App() {
             <li key={todo.id}>{todo.content}</li>
           ))}
         </ul>
-        <button onClick={signOut}>Cerrar sesión</button>
+        <button onClick={customSignOut}>Cerrar sesión</button> {/* Usamos la nueva función aquí */}
         <div>
           🥳 App de testeo login
           <br />
