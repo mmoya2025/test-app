@@ -13,6 +13,10 @@ import { User } from "aws-cdk-lib/aws-iam";
 Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
+const signOut = (event: React.MouseEvent<HTMLButtonElement>) => {
+  // lógica de cierre de sesión
+};
+
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
