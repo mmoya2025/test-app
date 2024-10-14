@@ -46,7 +46,7 @@ export default function App() {
         </ul>
         <button onClick={signOut}>Cerrar sesión</button>
         <div>
-          🥳 App de testeo login.
+          🥳 App de testeo login
           <br />
           <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
             Review next steps of this tutorial.
