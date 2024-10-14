@@ -8,6 +8,8 @@ import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 import {Authenticator} from '@aws-amplify/ui-react';
+import { signOut } from "aws-amplify/auth";
+import { User } from "aws-cdk-lib/aws-iam";
 Amplify.configure(outputs);
 
 const client = generateClient<Schema>();
@@ -34,6 +36,7 @@ export default function App() {
   
   return (
     <Authenticator>
+      {({signOut, user}) => (
     <main>
       <h1>Pedidos</h1>
       <button onClick={createTodo}>+ new</button>
@@ -42,6 +45,7 @@ export default function App() {
           <li key={todo.id}>{todo.content}</li>
         ))}
       </ul>
+      <button>onClick {signOut}Cerrar sesion</button>
       <div>
         🥳 App de testeo login.
         <br />
