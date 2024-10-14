@@ -36,24 +36,23 @@ export default function App() {
   
   return (
     <Authenticator>
-      {({signOut, user}) => (
-    <main>
-      <h1>Pedidos</h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
-      <button>onClick {signOut}Cerrar sesion</button>
-      <div>
-        🥳 App de testeo login.
-        <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
-      </div>
-    </main>
+      <main>
+        <h1>Pedidos</h1>
+        <button onClick={createTodo}>+ new</button>
+        <ul>
+          {todos.map((todo) => (
+            <li key={todo.id}>{todo.content}</li>
+          ))}
+        </ul>
+        <button onClick={signOut}>Cerrar sesión</button>
+        <div>
+          🥳 App de testeo login.
+          <br />
+          <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
+            Review next steps of this tutorial.
+          </a>
+        </div>
+      </main>
     </Authenticator>
   );
 }
