@@ -20,6 +20,7 @@ const customSignOut = () => {
 
 export default function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   function listTodos() {
     client.models.Todo.observeQuery().subscribe({
@@ -41,7 +42,6 @@ export default function App() {
   }
 
   function clearTodos() {
-    // Asegúrate de que todos los objetos tengan la propiedad 'id'
     const deletePromises = todos.map(todo => {
       if (todo && typeof todo.id === 'string') {
         return client.models.Todo.delete({ id: todo.id });
@@ -61,8 +61,38 @@ export default function App() {
   return (
     <Authenticator>
       <main>
+        <header style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+          <div>
+            <button 
+              onClick={() => window.open('https://mpago.la/29rXFvq', '_blank')}
+              style={{ fontFamily: 'AestheticFont, sans-serif', marginRight: '10px' }}
+            >
+              MercadoPago
+            </button>
+            <button onClick={() => setMenuOpen(!menuOpen)} style={{ fontFamily: 'AestheticFont, sans-serif' }}>
+              Menu
+            </button>
+            {menuOpen && (
+              <div style={{
+                position: 'absolute',
+                right: '10px',
+                backgroundColor: 'white',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                zIndex: 1000,
+              }}>
+                <ul style={{ listStyle: 'none', padding: '10px', margin: 0 }}>
+                  <li style={{ padding: '5px', cursor: 'pointer', fontFamily: 'AestheticFont, sans-serif' }}>Test 1</li>
+                  <li style={{ padding: '5px', cursor: 'pointer', fontFamily: 'AestheticFont, sans-serif' }}>Test 2</li>
+                  <li style={{ padding: '5px', cursor: 'pointer', fontFamily: 'AestheticFont, sans-serif' }}>Test 3</li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </header>
+        
         <button onClick={createTodo}>Nuevo registro</button>
-        <button onClick={clearTodos}>Limpiar todos</button> {/* Botón para limpiar todos */}
+        <button onClick={clearTodos}>Limpiar todos</button>
         <ul>
           {todos.map((todo) => (
             <li key={todo.id}>{todo.content}</li>
@@ -72,9 +102,7 @@ export default function App() {
         <div>
           🥳 App de testeo login
           <br />
-          <a href="https://www.linkedin.com/in/mariano-moya-813b05123/">
-            Marian Developer
-          </a>
+          <a href="https://www.linkedin.com/in/mariano-moya-813b05123/">Marian Developer</a>
         </div>
       </main>
     </Authenticator>
