@@ -1,8 +1,7 @@
 body {
   margin: 0;
-  background: url('https://img.freepik.com/fotos-premium/fondo-hacker-hd-8k-fondo-pantalla-imagen-fotografica-stock_915071-60018.jpg?w=1060');
+  background: url('https://img.freepik.com/fotos-premium/fondo-hacker-hd-8k-fondo-pantalla-imagen-fotografica-stock_915071-60018.jpg?w=1060') no-repeat center center fixed;
   background-size: cover; /* Ajusta el tamaño de la imagen */
-  background-position: center; /* Centra la imagen */
   display: flex;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
@@ -16,11 +15,11 @@ main {
   background: black; /* Fondo negro para el main */
   height: 70vh; /* Cambia a 70% de la altura de la ventana */
   width: 100%; /* Asegúrate de que ocupe todo el ancho */
-  color: rgb(10, 10, 10);
   display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center; /* Centra el contenido verticalmente */
+  color: rgb(10, 10, 10);
 }
 
 button {
@@ -35,9 +34,11 @@ button {
   transition: border-color 0.25s;
   color: white;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

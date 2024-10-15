@@ -32,14 +32,24 @@ export default function App() {
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
+    const content = window.prompt("Todo content");
+    if (content) {
+      client.models.Todo.create({
+        content: content,
+      });
+    }
   }
 
   function clearTodos() {
-    // Elimina todos los registros del backend
-    Promise.all(todos.map(todo => client.models.Todo.delete(todo.id)))
+    // Asegúrate de que todos los objetos tengan la propiedad 'id'
+    const deletePromises = todos.map(todo => {
+      if (todo && typeof todo.id === 'string') {
+        return client.models.Todo.delete({ id: todo.id });
+      }
+      return Promise.reject(new Error("Invalid todo item"));
+    });
+
+    Promise.all(deletePromises)
       .then(() => {
         setTodos([]); // Limpia el estado local después de eliminar
       })
@@ -47,7 +57,7 @@ export default function App() {
         console.error("Error al eliminar los registros:", error);
       });
   }
-  
+
   return (
     <Authenticator>
       <main>
@@ -62,7 +72,7 @@ export default function App() {
         <div>
           🥳 App de testeo login
           <br />
-          <a href="https://www.linkedin.com/in/mariano-moya-813b05123//">
+          <a href="https://www.linkedin.com/in/mariano-moya-813b05123/">
             Marian Developer
           </a>
         </div>
